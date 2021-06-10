@@ -14,3 +14,38 @@ a {
 * {
   box-sizing: border-box;
 }
+h1 {
+  text-align: center;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  main {
+    width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  main {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  main {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  main {
+    width: 960px;
+  }
+}
+@media (min-width: 1400px) {
+  main {
+    width: 960px;
+  }
+}
