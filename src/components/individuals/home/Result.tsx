@@ -9,7 +9,7 @@ interface ResultProps {
 }
 
 export default function Result(props:ResultProps) {
-    const link = `${window.location.origin}/secret?saltId=${encodeURIComponent(props.saltId || '')}&searchKey=${encodeURIComponent(props.searchKey || '')}`;
+    const link = `${window.location.origin}/secret#${encodeURIComponent(props.saltId || '')}&${encodeURIComponent(props.searchKey || '')}`;
     return (
         <>
             <p className="text-center">
@@ -26,8 +26,6 @@ export default function Result(props:ResultProps) {
                     <Button>Copy the key</Button>
                 </CopyToClipboard>
             </div>
-            <h3>Want to know how and why it works securely?</h3>
-
         </>
     )
 }
