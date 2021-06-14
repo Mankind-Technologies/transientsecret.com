@@ -9,7 +9,7 @@ interface HomeFormProps {
 }
 
 export default function HomeForm(props:HomeFormProps) {
-    return (<main>
+    return (<>
         <Form
             layout="vertical"
             name="basic"
@@ -45,5 +45,5 @@ export default function HomeForm(props:HomeFormProps) {
                 </Button>
             </Form.Item>
         </Form>
-    </main>)
+    </>)
 }
