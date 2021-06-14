@@ -9,7 +9,7 @@ interface ResultProps {
 }
 
 export default function Result(props:ResultProps) {
-    const link = `${window.location.origin}/secret?saltId=${encodeURIComponent(props?.saltId || '')}&searchKey=${encodeURIComponent(props?.searchKey)}`;
+    const link = `${window.location.origin}/secret?saltId=${encodeURIComponent(props.saltId || '')}&searchKey=${encodeURIComponent(props.searchKey || '')}`;
     console.log(props);
     return (
         <>

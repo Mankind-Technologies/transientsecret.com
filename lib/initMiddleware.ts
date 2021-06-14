@@ -1,9 +1,10 @@
 import Cors from 'cors';
+import {NextApiRequest, NextApiResponse} from "next";
 
-function initMiddleware(middleware) {
-    return (req, res) =>
+function initMiddleware(middleware:any) {
+    return (req: NextApiRequest, res: NextApiResponse<any>) =>
         new Promise((resolve, reject) => {
-            middleware(req, res, (result) => {
+            middleware(req, res, (result:any) => {
                 if (result instanceof Error) {
                     return reject(result)
                 }
