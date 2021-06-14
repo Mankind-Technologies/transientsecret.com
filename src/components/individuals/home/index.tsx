@@ -1,8 +1,10 @@
-import {useCallback, useState} from "react";
+import React, {useCallback, useState} from "react";
 import HomeForm, {SecretFormData} from "./form";
-import {storeSecret, StoreSecretData} from "../../../cryptoSave";
+import {storeSecret, StoreSecretData} from "../../../crypto";
 import Loading from "../../atoms/Loading";
 import Result from "./Result";
+import Link from 'next/link';
+import Head from "next/head";
 
 enum Step {
     INPUTS,
@@ -24,10 +26,20 @@ export default function Home() {
             })
     },[]);
 
-    return (<main>
-        <h1>The secret sharing app <br /> for security freaks</h1>
-        {step === Step.INPUTS && <HomeForm onSubmit={v => handleFormSubmit(v)} />}
-        {step === Step.PROCESSING && <Loading />}
-        {step === Step.DONE && <Result  {...data} keypass={formData?.key} />}
-    </main>);
+    return (
+        <>
+            <Head>
+                <title>Share secrets | transientsecret.com</title>
+                <meta property="og:url" content="" />
+                <meta property="og:title" content="Share secrets | transientsecret.com" />
+                <meta property="og:description" content="Share secrets with transientsecret.com" />
+            </Head>
+            <main>
+                <h1>Burn before decrypt <br/> secret sharing app</h1>
+                {step === Step.INPUTS && <HomeForm onSubmit={v => handleFormSubmit(v)} />}
+                {step === Step.PROCESSING && <Loading />}
+                {step === Step.DONE && <Result  {...data} keypass={formData?.key} />}
+                <p><Link href="/how-it-works"><a>Want to know how it works?</a></Link></p>
+            </main>
+            </>);
 }
