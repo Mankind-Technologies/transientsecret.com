@@ -5,6 +5,9 @@ import ReactMarkdown from "react-markdown";
 
 interface Props {
     body: string,
+    slug:string,
+    title: string,
+    description: string,
 }
 
 const HowItWorks = (props:Props) => {

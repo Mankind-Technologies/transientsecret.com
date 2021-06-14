@@ -17,8 +17,8 @@ a {
 h1 {
   text-align: center;
 }
-main {
-  min-height: 100vh;
+.container {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -27,32 +27,55 @@ main {
   width: 100%;
 }
 @media (min-width: 576px) {
-  main {
+  .container {
     margin-left: auto;
     margin-right: auto;
     width: 540px;
   }
 }
 @media (min-width: 768px) {
-  main {
+  .container {
     width: 720px;
   }
 }
 @media (min-width: 992px) {
-  main {
+  .container {
     width: 960px;
   }
 }
 @media (min-width: 1200px) {
-  main {
+  .container {
     width: 960px;
   }
 }
 @media (min-width: 1400px) {
-  main {
+  .container {
     width: 960px;
   }
 }
 .text-center {
   text-align: center;
+}
+.ant-layout {
+  min-height: 100vh !important;
+  background: white!important;
+}
+.grid-3 {
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 575px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.column {
+  display: flex;
+  flex-direction: column;
 }

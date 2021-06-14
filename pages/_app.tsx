@@ -1,8 +1,9 @@
 import '../styles/globals.css'
 import 'antd/dist/antd.css';
 import Head from "next/head";
-
+import Footer from '../src/components/atoms/Footer';
 import type { AppProps } from 'next/app'
+import {Layout} from "antd";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (<>
@@ -15,7 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
     </Head>
-    <Component {...pageProps} />
+    <Layout>
+      <Layout.Content className="container">
+        <Component {...pageProps} />
+      </Layout.Content>
+      <Layout.Footer>
+        <Footer />
+      </Layout.Footer>
+    </Layout>
     </>);
 }
 export default MyApp

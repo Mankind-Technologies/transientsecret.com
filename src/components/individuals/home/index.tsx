@@ -34,12 +34,12 @@ export default function Home() {
                 <meta property="og:title" content="Share secrets | transientsecret.com" />
                 <meta property="og:description" content="Share secrets with transientsecret.com" />
             </Head>
-            <main>
+            <>
                 <h1>Burn before decrypt <br/> secret sharing app</h1>
                 {step === Step.INPUTS && <HomeForm onSubmit={v => handleFormSubmit(v)} />}
                 {step === Step.PROCESSING && <Loading />}
                 {step === Step.DONE && <Result  {...data} keypass={formData?.key} />}
                 <p><Link href="/how-it-works"><a>Want to know how it works?</a></Link></p>
-            </main>
+            </>
             </>);
 }

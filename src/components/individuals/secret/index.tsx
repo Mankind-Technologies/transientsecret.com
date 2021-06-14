@@ -44,13 +44,13 @@ export default function Secret() {
             <meta property="og:title" content="A secret shared | transientsecret.com" />
             <meta property="og:description" content="A secret shared with transientsecret.com" />
         </Head>
-        <main>
+        <>
             <h1>Burn before decrypt <br/> secret sharing app</h1>
             {step === Step.INPUTS && <SecretForm onSubmit={v => handleFormSubmit(v)} />}
             {step === Step.PROCESSING && <Loading />}
             {step === Step.DONE && secret && <Result secret={secret} />}
             {isError && <Error />}
             <p><Link href="/how-it-works"><a>Want to know how it works?</a></Link></p>
-        </main>
+        </>
     </>);
 }
