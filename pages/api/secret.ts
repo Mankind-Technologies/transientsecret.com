@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {cors} from "../../lib/initMiddleware";
 import {supabase} from "../../lib/initSupabase";
 import {definitions} from "../../lib/types/supabase";
 import {GetSecretRequest, GetSecretResponse, SetSecretRequest} from "../../src/types";
 
 
 export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
-  await cors(req, res);
   if (req.method === 'POST') {
     const request = req.body as SetSecretRequest;
     const response = await supabase
