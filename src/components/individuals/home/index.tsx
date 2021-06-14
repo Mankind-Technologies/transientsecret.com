@@ -1,7 +1,7 @@
 import {useCallback, useState} from "react";
 import HomeForm, {SecretFormData} from "./form";
 import {storeSecret, StoreSecretData} from "../../../cryptoSave";
-import Loading from "./Loading";
+import Loading from "../../atoms/Loading";
 import Result from "./Result";
 
 enum Step {

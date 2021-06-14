@@ -84,7 +84,6 @@ export const storeSecret = async (secret:string, password:string):Promise<StoreS
     };
 }
 export const retrieveSecret = async (saltIdString:string, searchKey:string, password:string) => {
-    debugger;
     const saltId = base64ToUint8Array(saltIdString);
     const passwordKey = await importKey(password);
     const id = await deriveHash(passwordKey, saltId, iters);

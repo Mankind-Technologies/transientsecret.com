@@ -2,11 +2,15 @@ import {useCallback, useState} from "react";
 import SecretForm from "./form";
 import { useRouter } from 'next/router'
 import {retrieveSecret} from "../../../cryptoSave";
+import Loading from "../../atoms/Loading";
+import Result from "./Result";
+import Error from './Error';
 
 enum Step {
     INPUTS,
     PROCESSING,
     DONE,
+    ERROR,
 }
 
 export default function Secret() {
@@ -21,19 +25,18 @@ export default function Secret() {
                 .then(secret => {
                     setSecret(secret);
                     setStep(Step.DONE);
-                });
+                })
+                .catch(() => {
+                    setStep(Step.ERROR);
+                })
         }
     },[saltId, searchKey, step]);
 
     return (<main>
+        <h1>The secret sharing app <br /> for security freaks</h1>
         {step === Step.INPUTS && <SecretForm onSubmit={v => handleFormSubmit(v)} />}
-        {step === Step.PROCESSING && <span>working...</span>}
-        {step === Step.DONE && (
-            <div>
-                <span>Done!</span>
-                <div>{secret}</div>
-            </div>
-        )}
-        <span>{ step }</span>
+        {step === Step.PROCESSING && <Loading />}
+        {step === Step.DONE && <Result secret={secret} />}
+        {step === Step.ERROR && <Error />}
     </main>);
 }

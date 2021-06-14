@@ -45,8 +45,14 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
           res.status(200).json(apiResponse);
           return;
         }
+      } else {
+        res.status(404).json({});
+        return;
       }
-      res.status(404).json({ });
+    } else {
+      console.log(dbResponse.error);
+      res.status(500).json({});
+      return;
     }
   }
   res.status(404).json({});

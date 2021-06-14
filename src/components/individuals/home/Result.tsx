@@ -10,14 +10,13 @@ interface ResultProps {
 
 export default function Result(props:ResultProps) {
     const link = `${window.location.origin}/secret?saltId=${encodeURIComponent(props.saltId || '')}&searchKey=${encodeURIComponent(props.searchKey || '')}`;
-    console.log(props);
     return (
         <>
-            <p>
+            <p className="text-center">
                 Share the link and the key by different channels
                 with the one you want to share the secret with.
             </p>
-            <div>
+            <div className="text-center">
                 <CopyToClipboard text={link}
                                  onCopy={() => message.info("Link copied!")}>
                     <Button>Copy the link</Button>
