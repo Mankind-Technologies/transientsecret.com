@@ -7,7 +7,6 @@ import {GetSecretRequest, GetSecretResponse, SetSecretRequest} from "../../src/t
 export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   try {
     if (req.method === 'POST') {
-      console.log("processing post secret request");
         const request = req.body as SetSecretRequest;
         const response = await supabase
             .from<definitions["Secret"]>("Secret")
@@ -19,16 +18,12 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
               SearchKey: request.searchKey,
               ExpiresAt: new Date((new Date()).getTime() + 1000 * 60 * 60).toISOString(),
             });
-        console.log("got response from supabase " + response.status);
         if (!response.error) {
-          console.log("going to send 204");
-          res.status(204).json({});
+          res.status(201).send({});
         } else {
-          console.log("going to send 500");
           console.log(response.error);
           res.status(500).json({});
         }
-      console.log("done with post secret");
       return;
     }
     if (req.method === 'DELETE') {
@@ -54,7 +49,6 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
           return;
         }
       } else {
-        console.log(dbResponse.error);
         res.status(500).json({});
         return;
       }
