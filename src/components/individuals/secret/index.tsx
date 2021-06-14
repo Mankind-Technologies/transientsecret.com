@@ -32,11 +32,12 @@ export default function Secret() {
         }
     },[saltId, searchKey, step]);
 
+    const isError = step === Step.ERROR || (step === Step.DONE && secret === undefined);
     return (<main>
         <h1>The secret sharing app <br /> for security freaks</h1>
         {step === Step.INPUTS && <SecretForm onSubmit={v => handleFormSubmit(v)} />}
         {step === Step.PROCESSING && <Loading />}
-        {step === Step.DONE && <Result secret={secret} />}
-        {step === Step.ERROR && <Error />}
+        {step === Step.DONE && secret && <Result secret={secret} />}
+        {isError && <Error />}
     </main>);
 }
