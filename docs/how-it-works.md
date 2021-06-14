@@ -53,7 +53,10 @@ Data stored in the backend:
 
 Data stored in the sharing url:
 - `searchKey`, a random byte array
-- `saltId`, a random byte array used to generate `keyId` 
+- `saltId`, a random byte array used to generate `keyId`
+
+The data stored in the sharing url is stored in the URI fragment, also known as
+  hash, therefore it is not sent to the server. (Thanks [wormhole.app](https://wormhole.app/security) for the inspiration)
 
 Data not stored anywhere:
 - `key` the user's input key
