@@ -1,4 +1,6 @@
 import {Button, Form, Input} from "antd";
+import { useRouter } from "next/router";
+
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -15,6 +17,7 @@ interface HomeFormProps {
 }
 
 export default function SecretForm(props:HomeFormProps) {
+    
     return (<main>
         <Form
             {...layout}

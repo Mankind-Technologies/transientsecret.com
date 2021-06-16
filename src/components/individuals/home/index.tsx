@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import HomeForm, {SecretFormData} from "./form";
 import {storeSecret, StoreSecretData} from "../../../crypto";
 import Loading from "../../atoms/Loading";
@@ -16,6 +16,8 @@ export default function Home() {
     const [step, setStep] = useState<Step>(Step.INPUTS);
     const [data, setData] = useState<StoreSecretData>();
     const [formData, setFormData] = useState<SecretFormData>();
+    const [loaded, setLoaded] = useState(false);
+    const [suported, setSuported] = useState(true);
     const handleFormSubmit = useCallback((formData) => {
         setFormData(formData);
         setStep(Step.PROCESSING)
@@ -26,20 +28,35 @@ export default function Home() {
             })
     },[]);
 
+    useEffect(() => {
+        setSuported(window.crypto !== undefined)
+        const havecrypto = window.crypto !== undefined;
+        setLoaded(true);
+    }, []);
     return (
         <>
-            <Head>
-                <title>Share secrets | transientsecret.com</title>
-                <meta property="og:url" content="" />
-                <meta property="og:title" content="Share secrets | transientsecret.com" />
-                <meta property="og:description" content="Share secrets with transientsecret.com" />
-            </Head>
-            <>
-                <h1>Burn before decrypt <br/> secret sharing app</h1>
-                {step === Step.INPUTS && <HomeForm onSubmit={v => handleFormSubmit(v)} />}
-                {step === Step.PROCESSING && <Loading />}
-                {step === Step.DONE && <Result  {...data} keypass={formData?.key} />}
-                <p><Link href="/how-it-works"><a>Want to know how it works?</a></Link></p>
-            </>
-            </>);
+            {(loaded && suported) && (
+                <>
+                    <Head>
+                        <title>Share secrets | transientsecret.com</title>
+                        <meta property="og:url" content="" />
+                        <meta property="og:title" content="Share secrets | transientsecret.com" />
+                        <meta property="og:description" content="Share secrets with transientsecret.com" />
+                    </Head>
+                    <>
+                        <h1>Burn before decrypt <br/> secret sharing app</h1>
+                        {step === Step.INPUTS && <HomeForm onSubmit={v => handleFormSubmit(v)} />}
+                        {step === Step.PROCESSING && <Loading />}
+                        {step === Step.DONE && <Result  {...data} keypass={formData?.key} />}
+                        <p><Link href="/how-it-works"><a>Want to know how it works?</a></Link></p>
+                    </>
+                </>
+            )}
+            {(loaded && !suported) && (
+                <>
+                    <div>Sorry, but youre browser not have support for this page.</div>
+                </>
+                )
+            }
+        </>);
 }
