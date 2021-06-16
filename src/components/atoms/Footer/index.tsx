@@ -13,7 +13,7 @@ export default function Footer() {
                 </div>
                 <div className="column">
                     <a target="_blank" href="https://github.com/Mankind-Technologies/transientsecret.com"><GithubOutlined /> GitHub</a>
-                    <a target="_blank" href="https://mankind.technology/insights/2021-transientsecret-com">The story</a>
+                    <a target="_blank" href="https://mankind.technology/projects/transient-secret">The story</a>
                 </div>
             </div>
             <div>
