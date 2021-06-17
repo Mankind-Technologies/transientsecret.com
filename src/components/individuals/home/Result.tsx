@@ -10,6 +10,7 @@ interface ResultProps {
 
 export default function Result(props:ResultProps) {
     const link = `${window.location.origin}/secret#${encodeURIComponent(props.saltId || '')}&${encodeURIComponent(props.searchKey || '')}`;
+    const linkKey = `${window.location.origin}/secret#${encodeURIComponent(props.saltId || '')}&${encodeURIComponent(props.searchKey || '')}&${encodeURIComponent(props.keypass || '')}`;
     return (
         <>
             <p className="text-center">
@@ -24,6 +25,10 @@ export default function Result(props:ResultProps) {
                 <CopyToClipboard text={props.keypass||''}
                                  onCopy={() => message.info('Key copied!')}>
                     <Button>Copy the key</Button>
+                </CopyToClipboard>
+                <CopyToClipboard text={linkKey}
+                                 onCopy={() => message.info('Link with Key copied!')}>
+                    <Button>Copy the link with key</Button>
                 </CopyToClipboard>
             </div>
         </>

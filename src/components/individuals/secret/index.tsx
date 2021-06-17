@@ -17,6 +17,28 @@ enum Step {
 export default function Secret() {
     const [step, setStep] = useState<Step>(Step.INPUTS);
     const [secret, setSecret] = useState<string|undefined>(undefined);
+    useEffect(() => {
+        debugger;
+        const params = window.location.hash
+            .replace('#','')
+            .split('&');
+        if(params.length === 3){
+            setStep(Step.PROCESSING);
+            const [saltId, searchKey, keypass] = window.location.hash
+                .replace('#','')
+                .split('&')
+                .map(decodeURIComponent);
+            retrieveSecret(saltId, searchKey, keypass)
+                .then(secret => {
+                    setSecret(secret);
+                    setStep(Step.DONE);
+                })
+                .catch(() => {
+                    setStep(Step.ERROR);
+                })
+        }
+    }, []);
+
     const handleFormSubmit = useCallback((formData) => {
         if (step === Step.INPUTS) {
             setStep(Step.PROCESSING);
