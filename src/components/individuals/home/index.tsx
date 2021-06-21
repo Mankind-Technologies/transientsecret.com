@@ -16,7 +16,6 @@ export default function Home() {
     const [step, setStep] = useState<Step>(Step.INPUTS);
     const [data, setData] = useState<StoreSecretData>();
     const [formData, setFormData] = useState<SecretFormData>();
-    const [loaded, setLoaded] = useState(false);
     const [suported, setSuported] = useState(true);
     const handleFormSubmit = useCallback((formData) => {
         setFormData(formData);
@@ -30,12 +29,10 @@ export default function Home() {
 
     useEffect(() => {
         setSuported(window.crypto !== undefined)
-        const havecrypto = window.crypto !== undefined;
-        setLoaded(true);
-    }, []);
+    }, [suported]);
     return (
         <>
-            {(loaded && suported) && (
+            {suported && (
                 <>
                     <Head>
                         <title>Share secrets | transientsecret.com</title>
@@ -52,9 +49,9 @@ export default function Home() {
                     </>
                 </>
             )}
-            {(loaded && !suported) && (
+            {!suported && (
                 <>
-                    <div>Sorry, but youre browser not have support for this page.</div>
+                    <div>Sorry, but your browser not have support for this page.</div>
                 </>
                 )
             }

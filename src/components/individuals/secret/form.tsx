@@ -1,5 +1,6 @@
 import {Button, Form, Input} from "antd";
 import { useRouter } from "next/router";
+import {useState} from "react";
 
 const layout = {
     labelCol: { span: 8 },
@@ -14,15 +15,16 @@ interface FormData {
 }
 interface HomeFormProps {
     onSubmit: (formData: FormData) => void,
+    defaultKey: string,
 }
 
 export default function SecretForm(props:HomeFormProps) {
-    
+    const [inputValue, setInputValue] = useState('');
     return (<main>
         <Form
             {...layout}
             name="basic"
-            initialValues={{ remember: true }}
+            initialValues={{ key: props.defaultKey }}
             onFinish={props.onSubmit}
         >
             <Form.Item
@@ -30,7 +32,10 @@ export default function SecretForm(props:HomeFormProps) {
                 name="key"
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
-                <Input.Password />
+                <Input.Password
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                />
             </Form.Item>
 
             <Form.Item {...tailLayout}>

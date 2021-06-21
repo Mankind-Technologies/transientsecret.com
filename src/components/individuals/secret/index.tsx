@@ -8,6 +8,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 enum Step {
+    URL_PARSE,
     INPUTS,
     PROCESSING,
     DONE,
@@ -15,28 +16,21 @@ enum Step {
 }
 
 export default function Secret() {
-    const [step, setStep] = useState<Step>(Step.INPUTS);
+    const [step, setStep] = useState<Step>(Step.URL_PARSE);
+    const [urlKey, setUrlKey] = useState<string>('');
     const [secret, setSecret] = useState<string|undefined>(undefined);
     useEffect(() => {
-        debugger;
         const params = window.location.hash
             .replace('#','')
             .split('&');
         if(params.length === 3){
-            setStep(Step.PROCESSING);
             const [saltId, searchKey, keypass] = window.location.hash
                 .replace('#','')
                 .split('&')
                 .map(decodeURIComponent);
-            retrieveSecret(saltId, searchKey, keypass)
-                .then(secret => {
-                    setSecret(secret);
-                    setStep(Step.DONE);
-                })
-                .catch(() => {
-                    setStep(Step.ERROR);
-                })
+            setUrlKey(keypass);
         }
+        setStep(Step.INPUTS);
     }, []);
 
     const handleFormSubmit = useCallback((formData) => {
@@ -68,7 +62,7 @@ export default function Secret() {
         </Head>
         <>
             <h1>Burn before decrypt <br/> secret sharing app</h1>
-            {step === Step.INPUTS && <SecretForm onSubmit={v => handleFormSubmit(v)} />}
+            {step === Step.INPUTS && <SecretForm defaultKey={urlKey} onSubmit={handleFormSubmit} />}
             {step === Step.PROCESSING && <Loading />}
             {step === Step.DONE && secret && <Result secret={secret} />}
             {isError && <Error />}
